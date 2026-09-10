@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#173f35" />
+  <meta name="description" content="Wochenpläne, Rezepte und Einkaufslisten für die Kita-Küche." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Küchenplan</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">K</div>
+      <div><p class="eyebrow">Kita-Küche</p><h1>Küchenplan</h1></div>
+      <button id="install-button" class="quiet-button hidden">Installieren</button>
+    </header>
+    <main id="app" class="content">
+      <section id="screen-plan" class="screen active" aria-labelledby="plan-title">
+        <div class="section-heading"><div><p class="eyebrow" id="week-label"></p><h2 id="plan-title">Wochenplan</h2></div><button id="previous-week" class="icon-button" aria-label="Vorherige Woche">‹</button><button id="next-week" class="icon-button" aria-label="Nächste Woche">›</button></div>
+        <label class="portion-card" for="portions"><span><strong>Anzahl der Kinder</strong><small>Mengen werden automatisch berechnet</small></span><input id="portions" type="number" min="1" max="500" inputmode="numeric" value="37" /></label>
+        <div id="day-list" class="day-list"></div>
+        <button id="create-list" class="primary-action">Einkaufsliste anzeigen <span>→</span></button>
+      </section>
+      <section id="screen-recipes" class="screen" aria-labelledby="recipes-title">
+        <div class="section-heading simple"><div><p class="eyebrow">Sammlung</p><h2 id="recipes-title">Rezepte</h2></div><button id="add-recipe" class="round-add" aria-label="Rezept hinzufügen">+</button></div>
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="recipe-search" type="search" placeholder="Rezepte durchsuchen" /></label><div id="recipe-list" class="recipe-list"></div>
+      </section>
+      <section id="screen-shopping" class="screen" aria-labelledby="shopping-title">
+        <div class="section-heading simple"><div><p class="eyebrow" id="shopping-week"></p><h2 id="shopping-title">Einkaufsliste</h2></div><button id="reset-checks" class="quiet-button">Zurücksetzen</button></div>
+        <div id="shopping-summary" class="summary-strip"></div><div id="shopping-list" class="shopping-list"></div>
+        <section class="stock-note"><h3>Vorrat prüfen</h3><p>Salz, Pfeffer, Gewürze, Öl und Essig</p><textarea id="stock-notes" rows="3" placeholder="Eigene Notiz hinzufügen"></textarea></section>
+      </section>
+      <section id="screen-output" class="screen" aria-labelledby="output-title">
+        <div class="section-heading simple"><div><p class="eyebrow">Drucken & Teilen</p><h2 id="output-title">Ausgabe</h2></div></div>
+        <div class="output-grid">
+          <article class="output-card"><span class="output-icon" aria-hidden="true">▤</span><div><h3>Essensplan</h3><p>Wochenübersicht mit Gerichten und Allergenen</p></div><button class="secondary-action" data-print="plan">PDF erstellen / drucken</button></article>
+          <article class="output-card"><span class="output-icon" aria-hidden="true">✓</span><div><h3>Einkaufsliste</h3><p>Zusammengefasste Mengen und Vorratsnotizen</p></div><button class="secondary-action" data-print="shopping">PDF erstellen / drucken</button></article>
+          <article class="output-card accent"><span class="output-icon" aria-hidden="true">↗</span><div><h3>Teilen</h3><p>Plan über die Apps auf diesem Gerät teilen</p></div><button id="share-plan" class="secondary-action">Essensplan teilen</button></article>
+        </div>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="Hauptnavigation"><button class="nav-item active" data-screen="plan"><span>▦</span>Wochenplan</button><button class="nav-item" data-screen="recipes"><span>☰</span>Rezepte</button><button class="nav-item" data-screen="shopping"><span>✓</span>Einkauf</button><button class="nav-item" data-screen="output"><span>↗</span>Ausgabe</button></nav>
+  </div>
+  <dialog id="meal-dialog" class="app-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow" id="meal-dialog-day">Gericht auswählen</p><h2>Was gibt es?</h2></div><button class="dialog-close" value="cancel" aria-label="Schließen">×</button></div></form><div id="meal-options" class="meal-options"></div></dialog>
+  <dialog id="recipe-dialog" class="app-dialog"><form id="recipe-form"><div class="dialog-head"><div><p class="eyebrow">Neuer Eintrag</p><h2>Rezept anlegen</h2></div><button type="button" class="dialog-close" data-close-recipe aria-label="Schließen">×</button></div><label class="field">Name<input name="name" required placeholder="z. B. Gemüseeintopf" /></label><label class="field">Beilage oder Zusatz<input name="side" placeholder="z. B. Brot und Obst" /></label><div class="field-row"><label class="field">Grundmenge für<input name="basePortions" type="number" min="1" value="10" required /></label><label class="field">Allergene<input name="allergens" placeholder="A1, C, G" /></label></div><label class="field">Zutaten<textarea name="ingredients" rows="5" placeholder="Kartoffeln | 2 | kg&#10;Milch | 1 | l"></textarea><small>Eine Zutat pro Zeile: Name | Menge | Einheit</small></label><button type="submit" class="primary-action">Rezept speichern <span>→</span></button></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div><script src="./app.js" defer></script>
+</body>
+</html>
