@@ -1,4 +1,4 @@
-const CACHE = "kuechenplan-v6";
+const CACHE = "kuechenplan-v7";
 const FILES = ["./", "./index.html", "./styles.css", "./app.js", "./planning.js", "./data.js", "./manifest.webmanifest", "./icon.svg"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES))));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("kuechenplan-") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));

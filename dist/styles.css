@@ -157,6 +157,14 @@ button { cursor: pointer; }
 .restore-actions button { padding: 10px 16px; }
 #recover-backup:disabled { opacity: .45; cursor: default; }
 #recipe-dialog { overflow-y: auto; }
+#recipe-view-dialog { overflow-y: auto; overflow-wrap: anywhere; }
+#recipe-view-dialog .dialog-head { align-items: flex-start; }
+#recipe-view-dialog .dialog-close { flex-shrink: 0; }
+.recipe-view-ingredients { list-style: none; padding: 0; margin: 12px 0 24px; }
+.recipe-view-ingredients li { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.recipe-view-ingredients strong { flex-shrink: 0; }
+.recipe-view-allergens { line-height: 1.6; }
+.recipe-view-button { background: var(--green); color: white; }
 @media print { #storage-error, #restore-dialog { display: none !important; } }
 .output-preview { grid-column: 1 / -1; min-width: 0; }
 .output-preview summary { cursor: pointer; color: var(--green); font-weight: 750; padding: 12px 0; }
